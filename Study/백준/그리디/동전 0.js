@@ -15,5 +15,4 @@ function solution(input) {
 
 // '/dev/stdin'
 const input = require('fs').readFileSync('stdin').toString().trim().split('\n');
-console.log(input)
-// console.log(solution(input))
+console.log(solution(input))
