@@ -6,6 +6,7 @@ function solution(bridge_length, weight, truck_weights) {
 
     while (truck_weights.length != 0) {
         answer++;
+        
 
         let shifts = bridge.shift();
         if (shifts > 0) {
