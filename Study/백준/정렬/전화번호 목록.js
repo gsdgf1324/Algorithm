@@ -11,12 +11,18 @@ function solution(input) {
         // let nList = input.splice(0, n).sort((a, b) => Number(a) - Number(b));
 
         // 전화번호 배열, 문자열로 정렬필요 
+
+        console.log(input.splice(0, n).sort());
+
         let nList = input.splice(0, n).sort((a, b) => {
             if (a < b) return -1;
             if (a > b) return 1;
             if (a === b) return 0;
             else return -1;
         });
+
+        console.log(nList);
+
         for (let j = 0; j < nList.length - 1; j++) {
 
             // 전화번호 배열을 숫자형으로 정렬 했을 때 아래와 같이 모든 데이터와 비교가 필요하다 => 불필요 비교가 늘어남
