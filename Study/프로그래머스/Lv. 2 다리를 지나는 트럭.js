@@ -10,6 +10,7 @@ function solution(bridge_length, weight, truck_weights) {
         let shifts = bridge.shift();
         if (shifts > 0) {
             curW -= shifts;
+            
             curL -= 1;
         }
 
