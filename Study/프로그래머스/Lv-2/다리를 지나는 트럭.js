@@ -1,6 +1,9 @@
 function solution(bridge_length, weight, truck_weights) {
     var answer = 0;
-    let bridge = Array.from({ length: bridge_length }, (dr) => 0); //현재 다리 배열, 이 배열의 길이는 항상 bridge_length를 유지해야함
+    
+    let bridge = Array.from({ length: bridge_length }, (dr) => 0); 
+    //현재 다리 배열, 이 배열의 길이는 항상 bridge_length를 유지해야함
+
     let curW = 0; //현재 다리의 트럭 무게의 합
     let curL = 0; //현재 다리의 트럭 수
 
@@ -25,7 +28,8 @@ function solution(bridge_length, weight, truck_weights) {
 
     }
 
-    answer += bridge_length; //위 반복문을 지나면 마지막 트럭이 다리에 올라갈때 끝남, 따라서 트럭이 다리를 나올때까지 걸리는 시간을 더해주어야함.
+    answer += bridge_length; 
+    //위 반복문을 지나면 마지막 트럭이 다리에 올라갈때 끝남, 따라서 트럭이 다리를 나올때까지 걸리는 시간을 더해주어야함.
 
     return answer;
 }
