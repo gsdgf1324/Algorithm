@@ -16,8 +16,8 @@ function getCombinations(arr, combineNum) {
     return result
 }
 
-const example = ['A','B','C'];
-console.log(getCombinations(example, 2));
+const example = ['A', 'B', 'C'];
+console.log(getCombinations(example, 3));
 
 // 수열
 // function getCombinations2(arr, combineNum) {
