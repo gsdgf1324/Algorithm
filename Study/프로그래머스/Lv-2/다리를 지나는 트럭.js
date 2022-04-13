@@ -27,7 +27,7 @@ function solution(bridge_length, weight, truck_weights) {
             bridge.push(input); //다리에 트럭을 넣어줌
             
         } else {
-            bridge.push(0); //트럭이 올라가지 못하는 경우 0을 넣어줌
+            bridge.push(0); //트럭이 올라가지 못하는 경우 기본값 0을 넣어줌
         }
 
     }
