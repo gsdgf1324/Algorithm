@@ -20,7 +20,7 @@ function solution(input) {
         }
     });
     Object.keys(innerObj).forEach((dr) => {
-        innerObj[`${dr}`] = innerObj[`${dr}`].sort((a, b) => a - b);
+        innerObj[`${dr}`] = innerObj[`${dr}`].sort((a, b) => ㅁa - b);
     })
 
 

@@ -3,28 +3,17 @@ function solution(input) {
     let innerArr = new Object();
 
     input.slice(1).forEach((dr) => {
-        dr = dr.split(' ');
-
-        let key = dr[0];
-        let value = dr[1];
-
-        if (innerArr[`${key}`]) {
-            innerArr[`${key}`] = [...innerArr[`${key}`], value].sort((a, b) => a - b);
-        } else {
-            innerArr[`${key}`] = [value];
-        }
-
-        if (innerArr[`${value}`]) {
-            innerArr[`${value}`] = [...innerArr[`${value}`], key].sort((a, b) => a - b);
-        } else {
-            innerArr[`${value}`] = [key];
-        }
-
+        let [d1, d2] = dr.split(' ');
+        innerArr[d1] = innerArr[d1] ? [...innerArr[d1], d2] : [d2];
+        innerArr[d2] = innerArr[d2] ? [...innerArr[d2], d1] : [d1];
     });
+
+    for (let data in innerArr) {
+        innerArr[data] = innerArr[data].sort((a, b) => Number(a) - Number(b));
+    }
 
     console.log(DFS(innerArr, info));
     console.log(BFS(innerArr, info));
-
 }
 
 // 깊이 우선 탐색
@@ -95,15 +84,15 @@ DFS와 BFS 둘 다 다음 노드가 방문하였는지를 확인하는 시간과
 => DFS, BFS 두 가지 방법 중 어느 것을 사용하셔도 상관없음
 2. 경로의 특징을 저장해둬야 하는 문제
 => 예를 들면 각 정점에 숫자가 적혀있고 a부터 b까지 가는 경로를 구하는데 경로에 같은 숫자가 있으면 안 된다는 문제 등,
-   각각의 경로마다 특징을 저장해둬야 할 때는 DFS를 사용(BFS는 경로의 특징을 가지지 못함)
+   각각의 경로마다 특징을 저장해둬야 할 때는 자식노드가 존재하는지에 대한 물음을 기반으로 탐색하기 때문에 DFS를 사용(BFS는 경로의 특징을 가지지 못함)
 3. 최단거리 구해야 하는 문제
 => 미로 찾기 등 최단거리를 구해야 할 경우, BFS가 유리합니다.
-   (깊이 우선 탐색으로 경로를 검색할 경우 처음으로 발견되는 해답이 최단거리가 아닐 수 있지만, 
+   (깊이 우선 탐색으로 경로를 검색할 경우 처음으로 발견되는 해답이 최단거리가 아닐 수 있지만,
    너비 우선 탐색으로 현재 노드에서 가까운 곳부터 찾기 때문에경로를 탐색 시 먼저 찾아지는 해답이 곧 최단거리)
 */
 
 
-/*
+/* ex1
 const graph = {
     A: ["B", "C"],
     B: ["A", "D"],
@@ -148,4 +137,65 @@ const BFS = (graph, startNode) => {
     }
     return visited;
 };
+*/
+
+/* ex2
+const graph = {
+    A: ["B", "C"],
+    B: ["A", "D"],
+    C: ["A", "G", "H", "I"],
+    D: ["B", "E", "F"],
+    E: ["D"],
+    F: ["D"],
+    G: ["C"],
+    H: ["C"],
+    I: ["C", "J"],
+    J: ["I"],
+};
+
+const DFS = (graph, startNode) => {
+    const visited = []; // 탐색을 마친 노드들
+    let needVisit = []; // 탐색해야할 노드들
+
+    needVisit.push(startNode); // 노드 탐색 시작
+
+    while (needVisit.length !== 0) { // 탐색해야할 노드가 남아있다면
+        const node = needVisit.shift();
+        if (!visited.includes(node)) { // 해당 노드가 탐색된 적 없다면
+            visited.push(node);
+            needVisit = [...graph[node], ...needVisit];
+        }
+    }
+    return visited;
+};
+
+function recursive_DFS(graph, v, visited = []) {
+    visited.push(v);
+    for (let i = 0; i < graph[v].length; i++) {
+        if (!visited.includes(graph[v][i])) {
+            visited = recursive_DFS(graph, graph[v][i], visited);
+        }
+    }
+    return visited
+}
+
+const BFS = (graph, startNode) => {
+    const visited = []; // 탐색을 마친 노드들
+    let needVisit = []; // 탐색해야할 노드들
+
+    needVisit.push(startNode); // 노드 탐색 시작
+
+    while (needVisit.length !== 0) { // 탐색해야할 노드가 남아있다면
+        const node = needVisit.shift();
+        if (!visited.includes(node)) { // 해당 노드가 탐색된 적 없다면
+            visited.push(node);
+            needVisit = [...needVisit, ...graph[node]];
+        }
+    }
+    return visited;
+};
+
+console.log(DFS(graph, 'A').join(''));
+console.log(recursive_DFS(graph, 'A').join(''));
+console.log(BFS(graph, 'A').join(''));
 */
