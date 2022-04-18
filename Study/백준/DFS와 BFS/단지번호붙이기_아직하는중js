@@ -1,0 +1,21 @@
+function solution(input) {
+    let len = input.splice(0,1);
+    console.log(input)
+}
+
+function DFS(graph, node, visited = []) {
+    visited.push(node);
+
+    for (let i = 0; i < graph[node].length; i++) {
+        if (!visited.includes(graph[node][i])) {
+            DFS(graph, graph[node][i], visited);
+        }
+    }
+
+    return visited
+}
+
+
+'/dev/stdin'
+const input = require('fs').readFileSync('stdin').toString().trim().split('\n');
+solution(input);
