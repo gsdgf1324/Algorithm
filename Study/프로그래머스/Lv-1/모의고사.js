@@ -21,17 +21,17 @@ function solution(answers) {
     });
 
     let maxNum = Math.max(answer1, answer2, answer3);
-    if(answer1>=maxNum){
+    if (answer1 >= maxNum) {
         answer.push(1);
     }
-    if(answer2>=maxNum){
+    if (answer2 >= maxNum) {
         answer.push(2);
     }
-    if(answer3>=maxNum){
+    if (answer3 >= maxNum) {
         answer.push(3);
     }
 
     return answer;
 }
 
-console.log(solution([1,2,3,4]));
+console.log(solution([1, 2, 3, 4]));
