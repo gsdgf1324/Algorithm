@@ -6,7 +6,7 @@ function solution(input) {
 
         if (dr != 0) {
             let primeList = Array.from({ length: dr * 2 + 1 }, (dr) => true);
-            primeList[0]= false, primeList[1] = false; // 0,1은 소수가 아님
+            primeList[0] = false, primeList[1] = false; // 0,1은 소수가 아님
 
             // 에라토스테네스의 체 활용
             for (let i = 2; i <= dr * 2; i++) {
