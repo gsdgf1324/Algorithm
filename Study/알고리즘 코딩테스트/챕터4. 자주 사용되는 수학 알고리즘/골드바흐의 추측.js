@@ -13,6 +13,7 @@ function solution(input) {
     let N = Number(input[0]);
 
     let fillArr = fillSieve(N);
+    console.log(fillArr)
 
     for (let p = 3; p <= N / 2; p += 2) {
         let q = N - p;

@@ -107,8 +107,91 @@ function getFibo2(nIdx) {
     return fib[nIdx];
 }
 
-console.log(getFibo1(20));
-console.log(getFibo2(20));
+
+function fillSieve_1(N) {
+
+    /*
+    idx와 숫자를 매칭시키기 위해 N+1 만큼 해줌 (인덱스 번호가 주어진 숫자 n과 대응하도록)
+    => 숫자 1의 소수 여부값 => isPrime[1]에 저장
+     */
+    let isPrime = Array.from({ length: N + 1 }, (dr, idx) => idx);
+
+    isPrime[0] = 0; // 0은 소수가 아니므로 0으로
+    isPrime[1] = 0; // 1은 소수가 아니므로 0으로
+
+    for (let num = 2; num <= N; num++) {
+
+        // 현재 값이 소수가 아니면 continue
+        if (isPrime[num] == 0) {
+            continue;
+        }
+
+        /*
+        현재 값이 소수이면 해당 값의 제곱부터, 
+        => ex) i가 7 일 때, 7의 제곱 수 49 이전의 7의 배수들은 이미 앞에서 소수체크가 된 상태
+               즉 14, 21, 28.. 값들은 이미 지워진 상태 !
+         */
+        for (let i = num * num; i <= N; i += num) {
+            isPrime[i] = 0;
+        }
+    }
+
+    // 검사 후 0이 아닌 값들은 소수임 !
+    return isPrime.filter((dr) => dr != 0).join(', ');
+}
+
+
+function solution(N) {
+
+    // 1~N 까지 소수 여부를 저장하는 배열
+    let fillArr = fillSieve(N);
+
+    /*
+    [ 3 ~ N/2 ] 범위를 반복하며 ( p, N-p ) 두 값이 소수 인지를 체크
+    N/2 범위까지 하는 이유는 더 이상 넘어가면 앞에서 검사한 수와 동일하기 때문!!
+    => ex) N = 12 일때 검사하는 두 수는 (3,9) (5,7) (7,5) (9,3)
+           위 예시처럼 6을 넘어가면 앞에서 검사한 중복 된 수를 검사함!
+     */
+    for (let p = 3; p <= N / 2; p += 2) {
+        let q = N - p;
+
+        // p && q 가 모두 소수이면 정답!
+        if (fillArr[p] && fillArr[q]) {
+            return [p, q]
+        }
+    }
+
+    return -1;
+}
+
+function fillSieve(N) {
+
+    let isPrime = Array.from({ length: N + 1 }).fill(true);
+
+    // 0, 1 은 소수가 아님.
+    isPrime[0] = false;
+    isPrime[1] = false;
+
+    for (let num = 2; num <= N; num++) {
+
+        if (isPrime[num] == false) {
+            continue;
+        }
+
+        for (let i = num * num; i <= N; i += num) {
+            isPrime[i] = false;
+        }
+
+    }
+
+    // 소수인 값은 true, 소수가 아니면 false를 가지는 배열
+    return isPrime;
+}
+
+console.log(solution(42))
+
+
+// console.log(fillSieve(37));
 
 // console.log(isPrime(2976221));
 // console.log(getDistance([0, 3], [4, 2]));
@@ -122,3 +205,6 @@ console.log(getFibo2(20));
 // console.log(getGCD1(75221805, 105181189));
 // console.log(getGCD2(75221805, 105181189));
 // console.log(getGCD3(75221805, 105181189));
+
+// console.log(getFibo1(20));
+// console.log(getFibo2(20));

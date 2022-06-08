@@ -49,6 +49,7 @@ function solution(lottos, win_nums) {
 
     return answer
 }
+
 let lottos = [44, 1, 0, 0, 31, 25];
 let win_nums = [31, 10, 45, 1, 6, 19];
 console.log(solution(lottos, win_nums));

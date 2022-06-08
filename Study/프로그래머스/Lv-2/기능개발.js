@@ -3,7 +3,8 @@ function solution(progresses, speeds) {
 
     let mineList = [];
     progresses.map((dr, idx) => {
-        return mineList.push(((100 - dr) % speeds[idx]) == 0 ? ((100 - dr) / speeds[idx]) : parseInt((100 - dr) / speeds[idx]) + 1)
+        return mineList.push(((100 - dr) % speeds[idx]) == 0 ? ((100 - dr) / speeds[idx]) : parseInt((100 - dr) / speeds[idx]) + 1);
+        // Math.ceil() 왜 못 썻징?
     });
 
     let compare = mineList[0];
