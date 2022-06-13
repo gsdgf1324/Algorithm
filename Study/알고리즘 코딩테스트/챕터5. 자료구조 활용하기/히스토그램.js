@@ -39,7 +39,7 @@ function solution(input) {
 
             // 오른쪽으로는 h(현재값)의 바로 왼쪽까지 확장 가능하며
             // 왼쪽으로는 스택에 남아있는 마지막 막대기의 바로 오른쪽까지 확장 가능
-            let width = (lh.leftX - bh.rightX);
+            let width = (h.leftX - bh.rightX);
             let height = lh.height;
             let area = width * height;
             answer = Math.max(area, answer);
