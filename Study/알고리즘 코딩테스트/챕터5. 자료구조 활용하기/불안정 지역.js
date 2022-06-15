@@ -28,3 +28,88 @@ function solution(input) {
 // '/dev/stdin'
 const input = require('fs').readFileSync('stdin').toString().trim().split('\n');
 console.log(solution(input));
+
+class PriorityQueue {
+    constructor(isMax) {
+        this.queue = [0];
+        this.isMax = isMax;
+    }
+
+    enqueue(element) {
+        let enIdx = this.queue.length;
+
+        if (this.isMax) { //최대 힙
+            while (enIdx > 1 && this.queue[Math.floor(enIdx / 2)] <= element) {
+                this.queue[enIdx] = this.queue[Math.floor(enIdx / 2)];
+                enIdx = Math.floor(enIdx / 2);
+            }
+        } else { //최소 힙
+            while (enIdx > 1 && this.queue[Math.floor(enIdx / 2)] >= element) {
+                this.queue[enIdx] = this.queue[Math.floor(enIdx / 2)];
+                enIdx = Math.floor(enIdx / 2);
+            }
+        }
+
+        this.queue[enIdx] = element;
+    }
+
+    dequeue() {
+        let delElement = this.queue[1];
+        let temp = this.queue.pop();
+        this.queue[1] = temp;
+
+        let qSize = this.queue.length;
+        let pIdx = 1;
+        let cIdx = 2;
+
+        if (this.isMax) {
+            while (cIdx < qSize) {
+
+                if (this.queue[cIdx] < this.queue[cIdx + 1]) {
+                    cIdx += 1;
+                }
+
+                if (temp >= this.queue[cIdx]) {
+                    break;
+                }
+
+                this.queue[pIdx] = this.queue[cIdx];
+                pIdx = cIdx;
+                cIdx = cIdx * 2;
+            }
+        } else {
+            while (cIdx < qSize) {
+
+                if (this.queue[cIdx] > this.queue[cIdx + 1]) {
+                    cIdx += 1;
+                }
+
+                if (temp <= this.queue[cIdx]) {
+                    break;
+                }
+
+                this.queue[pIdx] = this.queue[cIdx];
+                pIdx = cIdx;
+                cIdx = cIdx * 2;
+            }
+        }
+
+        this.queue[pIdx] = temp;
+
+        return delElement
+    }
+}
+
+
+
+let pq = new PriorityQueue(false);
+pq.enqueue(3);
+pq.enqueue(9);
+pq.enqueue(10);
+pq.enqueue(11);
+pq.enqueue(5);
+pq.enqueue(7);
+console.log(pq);
+pq.dequeue();
+pq.dequeue();
+console.log(pq);

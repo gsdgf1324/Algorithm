@@ -12,7 +12,7 @@ function solution(priorities, location) {
                 location -= 1;
             }
         } else {
-            answer+=1;
+            answer += 1;
             if (location == 0) {
                 break
             } else {
@@ -25,6 +25,6 @@ function solution(priorities, location) {
     return answer;
 }
 
-let priorities = [2, 1, 3, 2]	
+let priorities = [2, 1, 3, 2]
 let location = 2;
-console.log(solution(priorities,location))
+console.log(solution(priorities, location))

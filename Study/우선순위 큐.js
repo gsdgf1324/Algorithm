@@ -141,5 +141,3 @@ console.log(pq.dequeue()); // => 현재 queue: [ 5, 3 ]
 console.log(pq.front()); // = 5
 console.log(pq.size()); // = 2
 console.log(pq.clear()); // // => 현재 queue: [ ]
-
-// https://hokeydokey.tistory.com/72
